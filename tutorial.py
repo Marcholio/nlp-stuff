@@ -2,6 +2,7 @@
 # https://www.youtube.com/watch?v=w36-U-ccajM&t=2s
 # https://www.youtube.com/watch?annotation_id=annotation_2104835535&feature=iv&index=3&list=PLQVvvaa0QuDf2JswnfiGkliBInZnIC4HL&src_vid=w36-U-ccajM&v=yGKTphqxR9Q
 # https://www.youtube.com/watch?annotation_id=annotation_4217019901&feature=iv&index=4&list=PLQVvvaa0QuDf2JswnfiGkliBInZnIC4HL&src_vid=yGKTphqxR9Q&v=6j6M2MtEqi8
+# https://www.youtube.com/watch?v=imPpT2Qo2sk
 
 import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize, PunktSentenceTokenizer
@@ -55,7 +56,15 @@ def process_content():
       words = nltk.word_tokenize(i)
       tagged = nltk.pos_tag(words)
       
-      # print(tagged)
+# === TUTORIAL 5 ===
+      chunkGram = r"""
+      Chunk: {<RB.?>*<VB.?>*<NNP>+<NN>?}
+      """
+  
+      chunkParser = nltk.RegexpParser(chunkGram)
+      chunked = chunkParser.parse(tagged)
+      
+      chunked.draw()
   except Exception as e:
     print(str(e))
     
